@@ -16,12 +16,9 @@ module Engine
         GAME_LOCATION = 'Southern US'
 
 
-        GAME_RULES_URL = {
-          'Rules' => 'https://boardgamegeek.com/filepage/219065/1822-railways-great-britain-rules',
-          '2-player rules (BGG thread)' => 'https://boardgamegeek.com/thread/2429917/article/34848979#34848979',
-        }.freeze
 
-        PLAYER_RANGE = [2, 7].freeze
+
+        PLAYER_RANGE = [3, 8].freeze
 
 
       end
