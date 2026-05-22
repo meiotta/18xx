@@ -4,7 +4,7 @@
 
 module Engine
   module Game
-    module G1822GC
+    module GGame
       module Map
         LAYOUT = :flat
 
@@ -12,6 +12,7 @@ module Engine
           'AA2' => 'Nashville & Knoxville',
           'AA6' => 'Jackson, TN',
           'AA12' => 'Tupelo',
+          'AA18' => 'Bay Springs',
           'AB9' => 'Corinth',
           'AB13' => 'Columbus',
           'AB25' => 'Biloxi',
@@ -25,6 +26,8 @@ module Engine
           'AG8' => 'Chattanooga',
           'AG14' => 'Auburn',
           'AG22' => 'Demopolis',
+          'AG24' => 'Destin',
+          'AH23' => 'Dothan',
           'AI20' => 'Columbus',
           'AJ11' => 'Atlanta',
           'AJ23' => 'Tallahassee & Jacksonville',
@@ -54,8 +57,10 @@ module Engine
           'P27' => 'Katy',
           'Q10' => 'Paris',
           'Q16' => 'Tyler',
+          'Q20' => 'Nagodoches',
           'Q22' => 'Lufkin',
           'Q24' => 'Huntsville',
+          'Q26' => 'Conroe',
           'Q28' => 'Houston',
           'Q30' => 'Galveston',
           'R13' => 'Texarkana',
@@ -118,36 +123,63 @@ module Engine
           '768' => 6,
           '769' => 6,
           '912' => 12,
+          'ch2' => { 'count' => 1, 'color' => 'yellow', 'code' => 'city=revenue:40;city=revenue:40;city=revenue:40;city=revenue:40;city=revenue:40;city=revenue:40;path=a:0,b:_0;path=a:1,b:_1;path=a:2,b:_2;path=a:3,b:_3;path=a:4,b:_4;path=a:5,b:_5;upgrade=cost:20;label=L' },
+          'ch3' => { 'count' => 1, 'color' => 'green', 'code' => 'city=revenue:60;city=revenue:60;city=revenue:60;city=revenue:60;city=revenue:60;city=revenue:60;path=a:0,b:_0;path=a:1,b:_1;path=a:2,b:_2;path=a:3,b:_3;path=a:4,b:_4;path=a:5,b:_5;upgrade=cost:250,terrain:water;label=L' },
+          'ch5' => { 'count' => 1, 'color' => 'grey', 'code' => 'city=revenue:120;city=revenue:120;city=revenue:120;city=revenue:120;city=revenue:120;city=revenue:120;path=a:0,b:_0;path=a:1,b:_1;path=a:2,b:_2;path=a:3,b:_3;path=a:4,b:_4;path=a:5,b:_5;label=L' },
+          'ch9' => { 'count' => 1, 'color' => 'brown', 'code' => 'city=revenue:90;city=revenue:90;city=revenue:90;city=revenue:90;city=revenue:90;city=revenue:90;path=a:0,b:_0;path=a:1,b:_1;path=a:2,b:_2;path=a:3,b:_3;path=a:4,b:_4;path=a:5,b:_5;upgrade=cost:20;label=L' },
+          'P1' =>
+            {
+              'count' => 1,
+              'color' => 'blue',
+              'code' =>
+                'city=revenue:yellow_30|green_40,slots:0;path=a:0,b:_0,terminal:1',
+            },
+          'P2' =>
+            {
+              'count' => 1,
+              'color' => 'blue',
+              'code' =>
+                'city=revenue:green_40|brown_50|gray_60,slots:0;path=a:0,b:_0,terminal:1',
+            },
+
+          'BC' =>
+            {
+              'count' => 1,
+              'color' => 'white',
+              'code' => 'icon=image:1822_mx/red_cube,large:1',
+              'hidden' => true,
+            },
+          
         }.freeze
 
         HEXES = {
           white: {
             %w[
-              AA4 AA8 AA10 AA14 AA16 AA18 AA20 AA22 AA24 AA26 AA28 AB3 AB5 AB7 AB11 AB15 AB17
-              AB19 AB21 AB23 AB27 AC4 AC6 AC8 AC10 AC12 AC14 AC16 AC20 AC22 AC26 AD5 AD7 AD9
-              AD11 AD13 AD15 AD17 AD19 AD21 AD23 AD25 AE4 AE6 AE8 AE14 AE16 AE18 AE20 AE22 AF5
-              AF7 AF11 AF13 AF15 AF21 AF23 AF25 AG16 AG18 AG20 AG24 AH9 AH15 AH17 AH19 AH21
-              AH23 AI8 AI10 AI16 AI22 AI24 F27 F33 G26 G28 G30 G32 G34 G36 H25 H27 H29 H31 H33
-              I28 I30 I32 J13 J15 J17 J19 J21 J23 J29 J31 J33 J35 J39 K10 K12 K16 K20 K22 K26
-              K28 K30 K32 K34 K38 L9 L11 L13 L15 L17 L19 L21 L23 L27 L29 L35 L39 M6 M8 M12 M14
-              M16 M18 M20 M24 M26 M28 M30 N5 N7 N9 N11 N17 N21 N23 N27 N29 O6 O8 O10 O12 O14
-              O16 O18 O20 O22 O24 O26 O28 P5 P7 P9 P11 P13 P15 P17 P19 P21 P23 P25 P29 Q4 Q6
-              Q8 Q12 Q14 Q18 Q20 Q26 R5 R7 R9 R11 R15 R17 R19 R21 R23 R25 R27 R29 S6 S14 S18
-              S20 S22 S26 T13 T15 T17 T19 T21 T25 T31 U4 U6 U8 U10 U12 U14 U16 U20 U22 U24 V5
-              V9 V17 V21 V29 V31 W4 W6 W8 W10 W12 W14 W16 W18 W20 W26 W28 X3 X9 X11 X15 X17
-              X25 X27 X29 Y4 Y12 Y14 Y22 Y26 Z9 Z17 Z19 Z23 Z25 Z27 Z29
+              AA4 AA8 AA10 AA14 AA16 AA20 AA22 AA24 AA26 AA28 AB3 AB5 AB7 AB11 AB15 AB17 AB19
+              AB21 AB23 AC4 AC6 AC8 AC10 AC12 AC14 AC16 AC20 AC22 AD5 AD7 AD9 AD11 AD13 AD15
+              AD17 AD19 AD21 AD23 AD25 AE4 AE6 AE8 AE14 AE16 AE18 AE20 AE22 AF5 AF7 AF11 AF13
+              AF15 AF21 AF23 AF25 AG16 AG18 AG20 AH9 AH15 AH17 AH19 AH21 AI8 AI10 AI16 AI22
+              AI24 F27 F33 G26 G28 G30 G32 G34 G36 H25 H27 H29 H31 H33 I28 I30 I32 J13 J15 J17
+              J19 J21 J23 J29 J31 J33 J35 J39 K10 K12 K16 K20 K22 K26 K28 K30 K32 K34 K38 L9
+              L11 L13 L15 L17 L19 L21 L23 L27 L29 L35 L39 M6 M8 M12 M14 M16 M18 M20 M24 M26
+              M28 M30 N5 N7 N9 N11 N17 N21 N23 N27 N29 O6 O8 O10 O12 O14 O16 O18 O20 O22 O24
+              O26 O28 P5 P7 P9 P11 P13 P15 P17 P19 P21 P23 P25 P29 Q4 Q6 Q8 Q12 Q14 Q18 R5 R7
+              R9 R11 R15 R17 R19 R21 R23 R25 R27 R29 S6 S14 S18 S20 S22 S26 T13 T15 T17 T19
+              T21 T25 T31 U4 U6 U8 U10 U12 U14 U16 U20 U22 U24 V5 V9 V17 V21 V29 V31 W4 W6 W8
+              W10 W12 W14 W16 W18 W20 W26 W28 X3 X9 X11 X15 X17 X25 X27 X29 Y4 Y12 Y14 Y22 Y26
+              Z9 Z17 Z19 Z23 Z25 Z27 Z29
             ] => '',
             %w[
-              AA6 AA12 AC18 AC24 AE10 AE24 AF17 AI20 I24 I34 J27 J37 K14 L31 L37 M10 N19 P27
-              Q10 Q16 S16 T27 U26 V7 V11 V15 V19 Y16 Z21
+              AA6 AA12 AA18 AC18 AC24 AE10 AE24 AF17 AH23 AI20 I24 I34 J27 J37 K14 L31 L37 M10
+              N19 P27 Q10 Q16 Q20 Q26 S16 T27 U26 V7 V11 V15 V19 Y16 Z21
             ] => 'city=revenue:0',
             ['AG8'] => 'city=revenue:0;upgrade=cost:40,terrain:hill',
             ['X13'] => 'city=revenue:0;upgrade=cost:40,terrain:river',
             ['V25'] => 'city=revenue:0;upgrade=cost:40,terrain:water',
             ['Y6'] => 'city=revenue:20;city=revenue:20;city=revenue:20;city=revenue:20;city=revenue:20;city=revenue:20;path=a:0,b:_0;path=a:1,b:_1;path=a:2,b:_2;path=a:3,b:_3;path=a:4,b:_4;path=a:5,b:_5;label=L;upgrade=cost:20',
             %w[
-              AB9 AB13 AB25 AF19 AG14 AG22 F29 F31 K18 K36 L33 M22 N13 N25 Q22 Q24 Q30 R13 S24
-              T23 U18 V13
+              AB9 AB13 AB25 AF19 AG14 AG22 AG24 F29 F31 K18 K36 L33 M22 N13 N25 Q22 Q24 Q30
+              R13 S24 T23 U18 V13
             ] => 'town=revenue:0',
             ['T5'] => 'upgrade=cost:20,terrain:hill',
             %w[
